@@ -1,0 +1,17 @@
+sus-compiler (2) stable; urgency=medium
+
+  * Fix sus library directory
+
+ -- Ilya Stolyarov <ila-embsys@gmail.com>  Thu, 05 Sep 2024 16:33:18 +0400
+
+sus-compiler (1) stable; urgency=medium
+
+  * Fix cargo install path in debian rules 
+
+ -- Ilya Stolyarov <ila-embsys@gmail.com>  Sun, 25 Aug 2024 23:16:39 +0400
+
+sus-compiler (0) stable; urgency=medium
+
+  * Initial release.
+
+ -- Ilya Stolyarov <ila-embsys@gmail.com>  Sun, 25 Aug 2024 06:02:00 +0400

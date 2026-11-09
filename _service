@@ -1,0 +1,36 @@
+<services>
+    <service name="obs_scm">
+        <param name="url">https://github.com/pc2/sus-compiler.git</param>
+        <param name="scm">git</param>
+        <param name="revision">master</param>
+        <param name="versionformat">@PARENT_TAG@+@TAG_OFFSET@</param>
+        <param name="versionrewrite-pattern">v(.*)</param>
+        <param name="versionrewrite-replacement">\1</param>
+        <param name="changesgenerate">enable</param>
+        <param name="filename">sus-compiler</param>
+        <param name="without-version">true</param>
+        <param name="exclude">.github</param>
+        <param name="exclude">philosophy</param>
+        <param name="exclude">verilog_output</param>
+        <param name="exclude">.git</param>
+        <param name="exclude">.gitignore</param>
+        <param name="exclude">.gitmodules</param>
+    </service>
+    <!--
+        Set manual mode and run the service locally until OBS instance
+        upgrade cargo_vendor to support "src" parameter
+    -->
+    <service name="cargo_vendor" mode="manual">
+        <param name="src">sus-compiler</param>
+        <param name="cargotoml">Cargo.toml</param>
+        <param name="update">true</param>
+    </service>
+    <service name="set_version"/>
+    <service name="tar" mode="buildtime">
+        <param name="obsinfo">sus-compiler.obsinfo</param>
+    </service>
+    <service name="recompress" mode="buildtime">
+        <param name="file">sus-compiler-*.tar</param>
+        <param name="compression">gz</param>
+    </service>
+</services>

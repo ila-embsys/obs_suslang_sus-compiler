@@ -1,0 +1,13 @@
+diff --git a/Cargo.toml b/Cargo.toml
+index b75c290..559c6e8 100644
+--- a/Cargo.toml
++++ b/Cargo.toml
+@@ -9,7 +9,7 @@ repository = "https://github.com/pc2/sus-compiler"
+ keywords = ["sus", "fpga", "vlsi", "verilog", "hdl"]
+ categories = ["compilers", "text-processing"]
+ readme = "README.md"
+-rust-version = "1.78"
++rust-version = "1.75"
+ 
+ [workspace]
+ members = [

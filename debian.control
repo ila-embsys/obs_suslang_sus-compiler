@@ -1,0 +1,12 @@
+Source: sus-compiler
+Priority: optional
+Maintainer: Ilya Stolyarov <ila.embsys@gmail.com>
+Standards-Version: 3.9.8
+Section: devel
+X-Cargo-Built-Using: ${cargo:X-Cargo-Built-Using}
+
+Package: sus-compiler
+Section: devel
+Architecture: all
+Description: A new Hardware Design Language that keeps you in the driver's seat
+

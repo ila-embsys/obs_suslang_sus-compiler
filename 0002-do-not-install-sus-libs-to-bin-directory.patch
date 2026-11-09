@@ -1,0 +1,34 @@
+diff --git a/build.rs b/build.rs
+index 77a1dad..4c7b3e6 100644
+--- a/build.rs
++++ b/build.rs
+@@ -3,19 +3,20 @@ use std::fs;
+ use std::path::PathBuf;
+ 
+ fn main() {
+-    let out_dir = env::var("OUT_DIR").unwrap();
+-    let install_dir = PathBuf::from(out_dir)
+-        .join("../../..")
+-        .join("share")
+-        .join("sus_compiler")
+-        .join("std");
++    // let out_dir = env::var("OUT_DIR").unwrap();
++    // let install_dir = PathBuf::from(out_dir)
++    //     .join("../../..")
++    //     .join("share")
++    //     .join("sus_compiler")
++    //     .join("std");
+     
+-    fs::create_dir_all(&install_dir).expect("Failed to create std_lib directory");
++    // fs::create_dir_all(&install_dir).expect("Failed to create std_lib directory");
+ 
+-    copy_dir("stl", &install_dir).expect("Failed to copy STL folder");
++    // copy_dir("stl", &install_dir).expect("Failed to copy STL folder");
+ 
+     // Print the path to make it available during the build
+-    println!("cargo:rustc-env=SUS_COMPILER_STD_LIB_PATH={}", install_dir.display());
++    println!("cargo:rustc-env=SUS_COMPILER_STD_LIB_PATH={}",
++        PathBuf::from(env::var("SUS_COMPILER_STD_LIB_PATH").unwrap()).display());
+ }
+ 
+ // Helper function to copy a directory and its contents recursively

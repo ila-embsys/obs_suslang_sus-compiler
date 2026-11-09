@@ -1,0 +1,36 @@
+#!/usr/bin/make -f
+
+prefix := /usr
+
+include /usr/share/dpkg/default.mk
+include /usr/share/rustc/architecture.mk
+export CFLAGS CXXFLAGS CPPFLAGS LDFLAGS
+export DEB_HOST_RUST_TYPE DEB_HOST_GNU_TYPE
+export PATH := /usr/share/cargo/bin:$(PATH)
+export CARGO=/usr/share/cargo/bin/cargo
+export CARGO_HOME=$(CURDIR)/debian/cargo_home
+export CARGO_REGISTRY=$(CURDIR)/debian/vendor
+export DEB_CARGO_CRATE=$(DEB_SOURCE)_$(DEB_VERSION_UPSTREAM)
+export DEB_BUILD_MAINT_OPTIONS=hardening=+bindnow
+
+%:
+	dh $@ 
+
+execute_after_dh_auto_clean:
+# Clean content of vendor.tar.zst
+	rm -rf debian/vendor
+	rm -rf debian/Cargo.lock
+	rm -rf debian/.cargo
+
+execute_before_dh_auto_configure:
+	tar -xf vendor.tar.zst --directory debian
+
+	$(CARGO) prepare-debian debian/vendor
+
+override_dh_auto_install:
+
+	DESTDIR=$(CURDIR)/debian/sus-compiler \
+	SUS_COMPILER_STD_LIB_PATH=${prefix}/share/sus_compiler/stl \
+		$(CARGO) install sus_compiler
+
+	install -D -t debian/share/sus_compiler/stl/ stl/*
